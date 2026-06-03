@@ -4,7 +4,8 @@
         "empty-block",
         "lowercase-global",
         "missing-parameter",
-        "need-check-nil"
+        "need-check-nil",
+        "param-type-mismatch"
     ],
     "problems.autoReveal": false,
     "problems.visibility": false,
