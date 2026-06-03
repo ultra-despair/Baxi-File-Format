@@ -1,0 +1,16 @@
+{
+    "Lua.diagnostics.disable": [
+        "discard-returns",
+        "empty-block",
+        "lowercase-global",
+        "missing-parameter",
+        "need-check-nil"
+    ],
+    "problems.autoReveal": false,
+    "problems.visibility": false,
+    "editor.unusualLineTerminators": "off",
+    "task.reconnection": true,
+    "outline.problems.enabled": false,
+    "outline.problems.colors": false,
+    "outline.problems.badges": false
+}
