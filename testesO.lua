@@ -1,5 +1,3 @@
----@diagnostic disable: trailing-space, lowercase-global, undefined-field, undefined-global
-
 --Baxi generator main script
 
 local list = io.popen("ls")
@@ -47,6 +45,7 @@ for i = 1, sumAllBaxi do
         end
     end
 end
+
 
 --main missing numbers "function"
 
