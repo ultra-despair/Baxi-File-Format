@@ -10,6 +10,8 @@ local sumAllBaxi = 0
 
 local indexList = 0 --only exists for the loop below
 
+local executeProgram = 1
+
 --Loops all the files to get the higher number (next loop)
 
 for temporaryList in list:lines() do
@@ -33,12 +35,8 @@ local tableMissing = {}
 
 local higherFilled = 0 --the higher value from tableFilled
 
-local sumRun = sumAllBaxi --a copy from sumAllBaxi because you cant use the same variable in two loops aparently
-
---Gets the higher number to loop
-
 for i = 1, sumAllBaxi do
-    for initialRun = 1, sumRun do
+    for initialRun = 1, #listFilesInDirectory do
         if string.match(listFilesInDirectory[i], "file" .. tostring(initialRun) .. ".baxi$") then
             table.insert(tableFilled, i, initialRun)
             if higherFilled < tableFilled[i] then
@@ -75,7 +73,23 @@ else
     end
 end
 
+io.output(writeMinimum or writeMax)
+
 --CLI
 
-print("Bem vindo ao baxi file maker, aqui você pode escrever informações para serem convertidas em .baxi")
-print("Escreva o que desejar, tudo será lido caso tenha o interpretador de .baxi")
+print([[Bem vindo ao baxi file maker, aqui você pode escrever informações para serem convertidas em .baxi
+Para melhor uso de uma olhada no README.md pois lá está bem explicado suas propriedades]])
+--[[print([[Welcome to baxi file maker, here um can write code to convert in .baxi file. 
+To use the full power of the software read the README.md)]]
+
+while executeProgram == 1 do
+    userInput = io.read()
+    if userInput == "" then
+        io.write("\n")
+    elseif userInput == "\\close" then
+        io.close()
+        executeProgram = 0
+    else
+        io.write(userInput .. "\n")
+    end
+end
