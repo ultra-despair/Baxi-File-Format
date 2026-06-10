@@ -10,7 +10,13 @@ local sumAllBaxi = 0
 
 local indexList = 0 --only exists for the loop below
 
-local executeProgram = 1
+local mainWrite = 1
+
+local executeProgramInLoop = 1
+
+local missingCount = 1
+
+local higherCount = 1
 
 --Loops all the files to get the higher number (next loop)
 
@@ -65,31 +71,58 @@ end
 
 --Writing main part 
 
-if #tableMissing == 0 then
-    writeMax = io.open("file" .. tostring(higherFilled + 1) .. ".baxi", "w")
-else
-    for initWrite = 1, #tableMissing do
-        writeMinimum = io.open("file".. tostring(tableMissing[initWrite]) .. ".baxi", "w")
+function openFile()
+    if #tableMissing == 0 then
+        writeMax = io.open("file" .. tostring(higherFilled + higherCount) .. ".baxi", "w")
+        higherCount = higherCount + 1
+        io.output(writeMax)
+    else
+        writeMinimum = io.open("file".. tostring(tableMissing[missingCount]) .. ".baxi", "w")
+        missingCount = missingCount + 1
+        io.output(writeMinimum)
     end
 end
 
-io.output(writeMinimum or writeMax)
+function writeInFile()
+    while mainWrite == 1 do
+        userInput = io.read()
+        if userInput == "" then
+            io.write("\n")
+        elseif userInput == "\\close" then
+            mainWrite = 0
+            io.close()
+        else
+            io.write(userInput .. "\n")
+        end
+    end
+
+    if #tableMissing == 0 then
+        print("\nFile wrote! Check the file: file" .. higherFilled + higherCount - 1 .. ".baxi")
+    else
+        print("File wrote! Check the file: file" .. missingCount .. ".baxi")
+    end
+
+    print("You want to create another file?")
+
+    continue = io.read()
+
+    if continue == "no" or continue == "No" or continue == "" then
+        executeProgramInLoop = 0
+    else
+        mainWrite = 1
+        print("")
+    end
+end
 
 --CLI
 
 print([[Bem vindo ao baxi file maker, aqui você pode escrever informações para serem convertidas em .baxi
 Para melhor uso de uma olhada no README.md pois lá está bem explicado suas propriedades]])
+
 --[[print([[Welcome to baxi file maker, here um can write code to convert in .baxi file. 
 To use the full power of the software read the README.md)]]
 
-while executeProgram == 1 do
-    userInput = io.read()
-    if userInput == "" then
-        io.write("\n")
-    elseif userInput == "\\close" then
-        io.close()
-        executeProgram = 0
-    else
-        io.write(userInput .. "\n")
-    end
+while executeProgramInLoop == 1 do
+    openFile()
+    writeInFile()
 end
