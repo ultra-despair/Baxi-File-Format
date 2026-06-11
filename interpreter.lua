@@ -24,6 +24,7 @@ baxinterpreter = {
     readInLines = function (file)
         --add fileOpen = io.open(file), "r")
         loopUtils.tableCount = 0 --for infoTable
+        loopUtils.removeNils = 0
         for interpreterLine in file:lines() do
             loopUtils.tableCount = loopUtils.tableCount + 1
             table.insert(infoTable, loopUtils.tableCount, interpreterLine)
@@ -32,7 +33,13 @@ baxinterpreter = {
             if infoTable[start] ~= "" then
                 valuesTables[start] = infoTable[start]
             end
-        end 
+        end
+        repeat
+            loopUtils.removeNils = loopUtils.removeNils + 1 
+            if valuesTables[loopUtils.removeNils] == nil then
+                table.remove(valuesTables, loopUtils.removeNils)
+            end
+        until loopUtils.removeNils == #valuesTables
         --debug 
         print("Infotable")
         for i = 1, #infoTable do
@@ -40,7 +47,9 @@ baxinterpreter = {
         end
         print("\nValuestable")
         for i = 1, #valuesTables do
-            print(valuesTables[i])
+            --if valuesTables[i] ~= nil then
+                print(valuesTables[i])
+            --end
         end
     end
 }
