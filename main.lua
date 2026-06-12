@@ -119,8 +119,8 @@ end
 print([[Bem vindo ao baxi file maker, aqui você pode escrever informações para serem convertidas em .baxi
 Para melhor uso de uma olhada no README.md pois lá está bem explicado suas propriedades]])
 
---[[print([[Welcome to baxi file maker, here um can write code to convert in .baxi file. 
-To use the full power of the software read the README.md)]]
+print([[Welcome to baxi file maker, here um can write code to convert in .baxi file. 
+To use the full power of the software read the README.md)]])
 
 while executeProgramInLoop == 1 do
     openFile()
